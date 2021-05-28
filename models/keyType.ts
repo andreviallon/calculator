@@ -1,4 +1,4 @@
-export enum ButtonTypeEnum {
+export enum KeyTypeEnum {
   DEFAULT = 'default',
   PRIMARY = 'primary',
   SECONDARY = 'secondary'
