@@ -1,4 +1,4 @@
-import { KeyTypeEnum } from '../models/KeyType'
+import { KeyTypeEnum } from '../models/keyType'
 
 interface Props {
   text: string;
