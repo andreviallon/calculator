@@ -7,10 +7,7 @@ export default function Home() {
   return (
     <div className="container mx-auto h-screen px-4">
       <div className="flex justify-center flex-col h-full">
-        <div className="mb-4">
-          <Header />
-        </div>
-        <Result result={300} />
+        <Result equation={previousResult} result={currentResult} />
         <div className="mt-4 p-8 bg-gray-700 rounded-xl grid grid-cols-4 gap-6">
           <div className="col-span-1">
             <Button text='7' buttonType={ButtonTypeEnum.DEFAULT} />
