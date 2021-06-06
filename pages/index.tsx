@@ -8,14 +8,14 @@ import { OperatorEnum } from '../models/operator'
 export default function Home() {
   const [previousResult, setPreviousResult] = useState('');
   const [currentResult, setCurrentResult] = useState('0');
-  const [operation, setOperation] = useState('');   
+  const [operation, setOperation] = useState('');
 
   const handleAction = (action: CalcActionEnum) => {
     if (action === CalcActionEnum.DEL) del();
 
     if (action === CalcActionEnum.RESET) clear();
 
-    if (action === CalcActionEnum.EQUALS) compute(); 
+    if (action === CalcActionEnum.EQUALS) compute();
   }
 
   const operate = (operand: OperatorEnum) => {
@@ -37,7 +37,7 @@ export default function Home() {
     setOperation(null);
   }
 
- const keyPress = (num: number | string) => {
+  const keyPress = (num: number | string) => {
     if (num === '.' && currentResult.includes('.')) return;
 
     if (currentResult === '0') {
