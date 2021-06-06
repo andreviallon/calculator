@@ -9,16 +9,23 @@ export default function Home() {
 	const [previousResult, setPreviousResult] = useState('');
 	const [currentResult, setCurrentResult] = useState('0');
 	const [operation, setOperation] = useState('');
+	const [isShowingResult, setIsShowResult] = useState(true);
 
 	const clear = () => {
 		setCurrentResult('0');
 		setPreviousResult('');
 		setOperation(null);
+		setIsShowResult(true);
 	};
 
 	const del = () => {
+		if (isShowingResult) return;
 		if (isNaN(parseFloat(currentResult))) clear();
-		setCurrentResult(currentResult.slice(0, -1));
+		if (currentResult.length === 1) {
+			setCurrentResult('0');
+		} else {
+			setCurrentResult(currentResult.slice(0, -1));
+		}
 	};
 
 	const calculate = (previous: number, current: number): number => {
@@ -55,6 +62,7 @@ export default function Home() {
 		setCurrentResult(result.toString());
 		setPreviousResult('');
 		setOperation(null);
+		setIsShowResult(true);
 	};
 
 	const handleAction = (action: CalcActionEnum) => {
@@ -81,6 +89,8 @@ export default function Home() {
 		} else {
 			setCurrentResult(currentResult + num);
 		}
+
+		setIsShowResult(false);
 	};
 
 	return (
