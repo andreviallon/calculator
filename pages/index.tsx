@@ -4,6 +4,8 @@ import { Key } from '../components/Key';
 import { KeyTypeEnum } from '../models/keyType';
 import { CalcActionEnum } from '../models/calcAction';
 import { OperatorEnum } from '../models/operator';
+import { handledKeys } from '../models/handledKeys';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 export default function Home() {
 	const [previousResult, setPreviousResult] = useState('');
@@ -95,6 +97,12 @@ export default function Home() {
 
 	return (
 		<div className="container mx-auto h-screen px-4">
+			<KeyboardEventHandler
+				handleKeys={handledKeys}
+				onKeyEvent={(key, e) =>
+					console.log(`do something upon keydown event of ${key}`)
+				}
+			/>
 			<div className="flex justify-center flex-col h-full">
 				<Result equation={previousResult} result={currentResult} />
 				<div className="mt-4 p-8 bg-gray-700 rounded-xl grid grid-cols-4 gap-6">
