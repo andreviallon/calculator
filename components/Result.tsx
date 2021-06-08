@@ -5,7 +5,7 @@ interface Props {
 
 export const Result: React.FC<Props> = ({ equation, result }) => {
   return (
-    <div className="flex justify-end p-8 bg-gray-800 rounded-xl">
+    <div className="flex justify-end p-8 bg-gray-800 rounded-xl h-36">
       <div className="flex flex-col items-end">
         <p className="font-medium tracking-tighter mb-4">
           {equation}
