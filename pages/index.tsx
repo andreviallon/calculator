@@ -5,7 +5,6 @@ import { KeyTypeEnum } from '../models/keyType';
 import { CalcActionEnum } from '../models/calcAction';
 import { OperatorEnum } from '../models/operator';
 import { handledKeys } from '../models/handledKeys';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 export default function Home() {
 	const [previousResult, setPreviousResult] = useState('');
