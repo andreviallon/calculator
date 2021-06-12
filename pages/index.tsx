@@ -51,19 +51,21 @@ export default function Home() {
 		return result;
 	};
 
-	const compute = () => {
-		let result: number = 0;
+	const compute = (): string => {
+		let result: string = '0';
 		let previous: number = parseFloat(previousResult);
 		let current: number = parseFloat(currentResult);
 
 		if (isNaN(previous) || isNaN(current)) return;
 
-		result = calculate(previous, current);
+		result = calculate(previous, current).toString();		
 
-		setCurrentResult(result.toString());
+		setCurrentResult(result);
 		setPreviousResult('');
 		setOperation(null);
 		setIsShowResult(true);
+
+		return result;
 	};
 
 	const handleAction = (action: CalcActionEnum) => {
@@ -76,9 +78,16 @@ export default function Home() {
 
 	const operate = (operand: OperatorEnum) => {
 		if (currentResult === '') return;
-		if (previousResult !== '') compute();
+
+		if (previousResult !== '' && currentResult !== '') {
+			const result = compute();			
+			setPreviousResult(result + operand);
+			
+		} else {
+			setPreviousResult(currentResult + operand);
+		}
+
 		setOperation(operand);
-		setPreviousResult(currentResult + operand);
 		setCurrentResult('');
 	};
 
@@ -96,12 +105,6 @@ export default function Home() {
 
 	return (
 		<div className="container mx-auto h-screen px-4">
-			<KeyboardEventHandler
-				handleKeys={handledKeys}
-				onKeyEvent={(key, e) =>
-					console.log(`do something upon keydown event of ${key}`)
-				}
-			/>
 			<div className="flex justify-center flex-col h-full">
 				<Result equation={previousResult} result={currentResult} />
 				<div className="mt-4 p-8 bg-gray-700 rounded-xl grid grid-cols-4 gap-6">
