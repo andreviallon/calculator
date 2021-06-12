@@ -3,14 +3,26 @@ import { Result } from '../components/Result';
 import { Key } from '../components/Key';
 import { KeyTypeEnum } from '../models/keyType';
 import { CalcActionEnum } from '../models/calcAction';
-import { OperatorEnum } from '../models/operator';
-import { handledKeys } from '../models/handledKeys';
+import { handledKeys, isNumberPressed, isOperatorPressed, KeysEnum, OperatorEnum } from '../models/Keys';
+import useKeypress from 'react-use-keypress';
 
 export default function Home() {
 	const [previousResult, setPreviousResult] = useState('');
 	const [currentResult, setCurrentResult] = useState('0');
 	const [operation, setOperation] = useState('');
 	const [isShowingResult, setIsShowResult] = useState(true);
+
+	useKeypress(handledKeys, (event) => {
+		if (event.key === KeysEnum.ENTER) compute();
+
+		if (event.key === KeysEnum.BACKSPACE) del();
+		
+		if (event.key === KeysEnum.ESCAPE) clear();
+
+		if (isNumberPressed(event.key)) keyPress(event.key);
+
+		if (isOperatorPressed(event.key)) operate(event.key);
+  });
 
 	const clear = () => {
 		setCurrentResult('0');
@@ -112,21 +124,21 @@ export default function Home() {
 						<Key
 							text="7"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('7')}
+							keyClick={() => keyPress(KeysEnum.SEVEN)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="8"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('8')}
+							keyClick={() => keyPress(KeysEnum.EIGHT)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="9"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('9')}
+							keyClick={() => keyPress(KeysEnum.NINE)}
 						/>
 					</div>
 					<div className="col-span-1">
@@ -140,21 +152,21 @@ export default function Home() {
 						<Key
 							text="4"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('4')}
+							keyClick={() => keyPress(KeysEnum.FOUR)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="5"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('5')}
+							keyClick={() => keyPress(KeysEnum.FIVE)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="6"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('6')}
+							keyClick={() => keyPress(KeysEnum.SIX)}
 						/>
 					</div>
 					<div className="col-span-1">
@@ -168,21 +180,21 @@ export default function Home() {
 						<Key
 							text="1"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('1')}
+							keyClick={() => keyPress(KeysEnum.ONE)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="2"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('2')}
+							keyClick={() => keyPress(KeysEnum.TWO)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="3"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('3')}
+							keyClick={() => keyPress(KeysEnum.THREE)}
 						/>
 					</div>
 					<div className="col-span-1">
@@ -196,14 +208,14 @@ export default function Home() {
 						<Key
 							text="."
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('.')}
+							keyClick={() => keyPress(KeysEnum.DECIMAL)}
 						/>
 					</div>
 					<div className="col-span-1">
 						<Key
 							text="0"
 							keyType={KeyTypeEnum.DEFAULT}
-							keyClick={() => keyPress('0')}
+							keyClick={() => keyPress(KeysEnum.ZERO)}
 						/>
 					</div>
 					<div className="col-span-1">
